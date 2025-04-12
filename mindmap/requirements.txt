@@ -2,6 +2,7 @@ flask
 python-dotenv
 transformers
 torch
+accelerate
 sentencepiece
 huggingface-hub
 gunicorn

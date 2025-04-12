@@ -5,39 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Planner AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* Custom styles for better appearance */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .dev-note {
+            display: inline-block;
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        #mindmap {
+            min-height: 500px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .loading-spinner {
+            border: 5px solid rgba(108, 99, 255, 0.2);
+            border-radius: 50%;
+            border-top: 5px solid var(--primary-color);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .map-instructions {
+            margin: 20px 0;
+        }
+        
+        .global-actions {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <main>
-        <div class="app-container">
-            <div class="input-section">
-                <h1>Project<span>Planner</span></h1>
-                <p class="subtitle">Enter your project idea and we'll break it down into actionable tasks</p>
-                <div class="input-container">
-                    <input type="text" id="central-idea" placeholder="What do you want to build or create?" autofocus>
-                    <button id="generate-btn">Plan Project</button>
-                </div>
-            </div>
-            
-            <div class="loading-container">
-                <div class="spinner"></div>
-                <p>Creating your project plan...</p>
-            </div>
-            
-            <div class="mindmap-container">
-                <div class="map-instructions">
-                    <p>Click on tasks to select them. Double-click to edit. Use the <span class="plus-icon">+</span> buttons to break tasks down further.</p>
-                </div>
-                <div id="mindmap"></div>
-                <div class="controls">
-                    <button id="refresh-btn">New Project</button>
-                    <button id="download-btn">Download Plan</button>
-                </div>
-            </div>
+    <div class="container">
+        <header>
+            <h1>Project Planner AI</h1>
+            <p class="subtitle">Enter your project idea and we'll break it down into actionable tasks.</p>
+            <p class="dev-note">👨‍💻 Developers: Open browser console (F12) to see detailed logs</p>
+        </header>
+        
+        <div class="input-container">
+            <input type="text" id="central-idea" placeholder="What do you want to build or create?">
+            <button id="generate-btn">Plan Project</button>
         </div>
-    </main>
-    
+        
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Creating your project plan...</p>
+        </div>
+        
+        <div class="mindmap-container">
+            <div class="mindmap-actions">
+                <div class="color-palette" style="display: none;">
+                    <div class="color-option" style="background-color: #95C8D8;"></div>
+                    <div class="color-option" style="background-color: #FFD375;"></div>
+                    <div class="color-option" style="background-color: #FA9285;"></div>
+                    <div class="color-option" style="background-color: #91D086;"></div>
+                    <div class="color-option" style="background-color: #B995C7;"></div>
+                </div>
+                <div class="node-actions" style="display: none;">
+                    <button id="delete-node-btn">Delete</button>
+                </div>
+                <div class="global-actions">
+                    <button id="download-btn">Download Plan</button>
+                    <button id="refresh-btn">New Project</button>
+                </div>
+            </div>
+            <div class="map-instructions">
+                Click on tasks to select them. Use the "+" button to break down tasks further.
+            </div>
+            <div id="mindmap"></div>
+        </div>
+    </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html> 

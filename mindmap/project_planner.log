@@ -1,0 +1,71 @@
+2025-04-12 11:14:43 [INFO] __main__ - Starting application
+2025-04-12 11:14:43 [INFO] __main__ - Loading language model...
+2025-04-12 11:16:31 [INFO] __main__ - DeepSeek model loaded successfully: deepseek-ai/deepseek-coder-6.7b-base
+2025-04-12 11:16:31 [INFO] __main__ - Model configuration: max_length=1024, temperature=0.7, top_p=0.95
+2025-04-12 11:16:31 [INFO] __main__ - Starting Flask development server
+2025-04-12 11:16:32 [INFO] werkzeug - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-12 11:16:32 [INFO] werkzeug - [33mPress CTRL+C to quit[0m
+2025-04-12 11:16:32 [INFO] werkzeug -  * Restarting with stat
+2025-04-12 11:16:41 [INFO] __main__ - Starting application
+2025-04-12 11:16:41 [INFO] __main__ - Loading language model...
+2025-04-12 11:18:04 [INFO] __main__ - DeepSeek model loaded successfully: deepseek-ai/deepseek-coder-6.7b-base
+2025-04-12 11:18:04 [INFO] __main__ - Model configuration: max_length=1024, temperature=0.7, top_p=0.95
+2025-04-12 11:18:04 [INFO] __main__ - Starting Flask development server
+2025-04-12 11:18:04 [WARNING] werkzeug -  * Debugger is active!
+2025-04-12 11:18:04 [INFO] werkzeug -  * Debugger PIN: 417-334-623
+2025-04-12 11:19:10 [INFO] __main__ - Serving index page
+2025-04-12 11:19:10 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:19:10] "GET / HTTP/1.1" 200 -
+2025-04-12 11:19:10 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:19:10] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-12 11:19:10 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:19:10] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-04-12 11:22:53 [INFO] __main__ - Starting application
+2025-04-12 11:22:53 [INFO] __main__ - Loading language model...
+2025-04-12 11:23:56 [INFO] __main__ - Starting application
+2025-04-12 11:23:56 [INFO] __main__ - Loading language model...
+2025-04-12 11:25:44 [INFO] __main__ - DeepSeek model loaded successfully: deepseek-ai/deepseek-coder-6.7b-base
+2025-04-12 11:25:44 [INFO] __main__ - Model configuration: max_length=1024, temperature=0.7, top_p=0.95
+2025-04-12 11:25:44 [INFO] __main__ - Starting Flask development server
+2025-04-12 11:25:44 [INFO] werkzeug - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-12 11:25:44 [INFO] werkzeug - [33mPress CTRL+C to quit[0m
+2025-04-12 11:25:44 [INFO] werkzeug -  * Restarting with stat
+2025-04-12 11:25:54 [INFO] __main__ - Starting application
+2025-04-12 11:25:54 [INFO] __main__ - Loading language model...
+2025-04-12 11:27:08 [INFO] __main__ - DeepSeek model loaded successfully: deepseek-ai/deepseek-coder-6.7b-base
+2025-04-12 11:27:08 [INFO] __main__ - Model configuration: max_length=1024, temperature=0.7, top_p=0.95
+2025-04-12 11:27:08 [INFO] __main__ - Starting Flask development server
+2025-04-12 11:27:08 [WARNING] werkzeug -  * Debugger is active!
+2025-04-12 11:27:08 [INFO] werkzeug -  * Debugger PIN: 417-334-623
+2025-04-12 11:27:23 [INFO] __main__ - Serving index page
+2025-04-12 11:27:23 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:27:23] "GET / HTTP/1.1" 200 -
+2025-04-12 11:27:24 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:27:24] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-12 11:27:24 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:27:24] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-04-12 11:27:40 [INFO] __main__ - [7177bad1] Received request to generate project plan for: 'building a website for note taking'
+2025-04-12 11:27:40 [INFO] __main__ - [7177bad1] Sending prompt to model (length: 1344 chars)
+2025-04-12 11:27:40 [INFO] __main__ - [7177bad1] Model: deepseek-ai/deepseek-coder-6.7b-base, Temperature: 0.7, Max length: 1024
+2025-04-12 11:28:26 [INFO] __main__ - Starting application
+2025-04-12 11:28:26 [INFO] __main__ - Loading language model...
+2025-04-12 11:29:49 [INFO] __main__ - Starting application
+2025-04-12 11:29:49 [INFO] __main__ - Loading language model...
+2025-04-12 11:31:38 [INFO] __main__ - DeepSeek model loaded successfully: deepseek-ai/deepseek-coder-6.7b-base
+2025-04-12 11:31:38 [INFO] __main__ - Model configuration: max_length=1024, temperature=0.7, top_p=0.95
+2025-04-12 11:31:38 [INFO] __main__ - Starting Flask development server
+2025-04-12 11:31:38 [INFO] werkzeug - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-12 11:31:38 [INFO] werkzeug - [33mPress CTRL+C to quit[0m
+2025-04-12 11:31:38 [INFO] werkzeug -  * Restarting with stat
+2025-04-12 11:31:52 [INFO] __main__ - Starting application
+2025-04-12 11:31:52 [INFO] __main__ - Loading language model...
+2025-04-12 11:32:51 [INFO] __main__ - DeepSeek model loaded successfully: deepseek-ai/deepseek-coder-6.7b-base
+2025-04-12 11:32:51 [INFO] __main__ - Model configuration: max_length=1024, temperature=0.7, top_p=0.95
+2025-04-12 11:32:51 [INFO] __main__ - Starting Flask development server
+2025-04-12 11:32:51 [WARNING] werkzeug -  * Debugger is active!
+2025-04-12 11:32:51 [INFO] werkzeug -  * Debugger PIN: 417-334-623
+2025-04-12 11:32:59 [INFO] __main__ - Serving index page
+2025-04-12 11:32:59 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:32:59] "GET / HTTP/1.1" 200 -
+2025-04-12 11:32:59 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:32:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-12 11:32:59 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:32:59] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-04-12 11:33:12 [INFO] __main__ - [10a70ce4] Received request to generate project plan for: 'build a note taking website'
+2025-04-12 11:33:12 [INFO] __main__ - [10a70ce4] Sending prompt to model (length: 1323 chars)
+2025-04-12 11:33:12 [INFO] __main__ - [10a70ce4] Model: deepseek-ai/deepseek-coder-6.7b-base, Temperature: 0.7, Max length: 1024
+2025-04-12 11:34:31 [INFO] werkzeug - 127.0.0.1 - - [12/Apr/2025 11:34:31] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
