@@ -5,8 +5,10 @@ import re
 import logging
 import datetime
 import uuid
-from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 from dotenv import load_dotenv
+from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.models import SystemMessage, UserMessage
+from azure.core.credentials import AzureKeyCredential
 
 # Setup enhanced logging
 logging.basicConfig(
@@ -24,44 +26,35 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 app = Flask(__name__)
+githubtoken = os.getenv("GITHUB_TOKEN")
 
-# Initialize model once at startup to avoid reloading
+# Initialize Azure AI client with GitHub token
 print("="*80)
 logger.info("Starting application")
-logger.info("Loading language model...")
-print("Loading DeepSeek model...")
-model_name = "deepseek-ai/deepseek-coder-6.7b-base"  # Using DeepSeek model
+logger.info("Initializing Azure AI client with Phi-4 model...")
+
+endpoint = "https://models.inference.ai.azure.com"
+model_name = "Phi-4-mini-instruct"
+
 try:
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    # Use GitHub token as the Azure credential
+    if not githubtoken:
+        raise ValueError("GitHub token not found in environment variables")
     
-    # Text generation pipeline
-    generator = pipeline(
-        "text-generation",
-        model=model,
-        tokenizer=tokenizer,
-        max_length=4096,
-        do_sample=True,
-        temperature=0.7,
-        top_p=0.95
+    ai_client = ChatCompletionsClient(
+        endpoint=endpoint,
+        credential=AzureKeyCredential(githubtoken),
     )
-    logger.info(f"DeepSeek model loaded successfully: {model_name}")
-    logger.info(f"Model configuration: max_length=1024, temperature=0.7, top_p=0.95")
+    
+    logger.info(f"Azure AI client initialized successfully with model: {model_name}")
+    logger.info(f"Model configuration: temperature=0.7, top_p=0.95, max_tokens=1500")
+    
 except Exception as e:
-    logger.error(f"Error loading DeepSeek model: {str(e)}")
-    print(f"Error loading DeepSeek model: {str(e)}")
-    logger.warning("Falling back to smaller model")
-    print("Falling back to smaller model...")
-    model_name = "google/flan-t5-base"  # Fallback to smaller model
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    generator = pipeline(
-        "text2text-generation", 
-        model=model_name,
-        tokenizer=tokenizer,
-        max_length=1024
-    )
-    logger.info(f"Fallback model loaded successfully: {model_name}")
-    logger.info(f"Fallback model configuration: max_length=1024")
+    logger.error(f"Error initializing Azure AI client: {str(e)}")
+    print(f"Error initializing Azure AI client: {str(e)}")
+    ai_client = None
+    logger.warning("Application will run with limited functionality")
+    print("Application will run with limited functionality - AI features disabled")
 print("="*80)
 
 @app.route('/')
@@ -86,8 +79,14 @@ def generate_mindmap():
         return jsonify({"error": "No central idea provided"}), 400
     
     try:
-        # Use local Hugging Face model to generate project tasks
-        prompt = f"""Create a detailed project breakdown for: '{central_idea}'.
+        if ai_client is None:
+            raise ValueError("AI client is not available")
+            
+        # Use Azure AI to generate project tasks
+        system_prompt = """You are a project planning assistant that helps break down ideas into actionable tasks.
+        Your responses should be formatted strictly as valid JSON objects."""
+        
+        user_prompt = f"""Create a detailed project breakdown for: '{central_idea}'.
         
         I need a structured list of tasks and components needed to complete this project/goal.
         
@@ -115,24 +114,38 @@ def generate_mindmap():
         Generate 5-7 major tasks/components with 2-3 specific action items or steps for each.
         Make each task specific, actionable, and directly related to implementing {central_idea}.
         Focus on concrete tasks that would be required to build or implement this project.
-        Do not use placeholders like "Task 1" - use specific action-oriented descriptions."""
+        Do not use placeholders like "Task 1" - use specific action-oriented descriptions.
         
-        logger.info(f"[{request_id}] Sending prompt to model (length: {len(prompt)} chars)")
-        print(f"[{timestamp}] Sending prompt to model:")
+        Return ONLY the JSON object without any additional text or explanations."""
+        
+        logger.info(f"[{request_id}] Sending prompt to Azure AI model (length: {len(user_prompt)} chars)")
+        print(f"[{timestamp}] Sending prompt to Azure AI model:")
         print(f"{'='*30} PROMPT {'='*30}")
-        print(prompt)
+        print(user_prompt)
         print(f"{'='*70}")
         
         # Log model parameters for this specific request
-        logger.info(f"[{request_id}] Model: {model_name}, Temperature: 0.7, Max length: 1024")
+        logger.info(f"[{request_id}] Model: {model_name}, Temperature: 0.7, Max tokens: 1500")
         
-        # Generate content with the model
+        # Generate content with the Azure AI model
         generation_start = datetime.datetime.now()
-        mindmap_content = generator(prompt, max_length=1024)[0]['generated_text']
+        
+        response = ai_client.complete(
+            messages=[
+                SystemMessage(system_prompt),
+                UserMessage(user_prompt),
+            ],
+            temperature=0.7,
+            top_p=0.95,
+            max_tokens=1500,
+            model=model_name
+        )
+        
+        mindmap_content = response.choices[0].message.content
         generation_time = (datetime.datetime.now() - generation_start).total_seconds()
         
         # Log the raw model output
-        logger.info(f"[{request_id}] Received response from model (generation time: {generation_time:.2f}s)")
+        logger.info(f"[{request_id}] Received response from Azure AI model (generation time: {generation_time:.2f}s)")
         logger.info(f"[{request_id}] Raw output length: {len(mindmap_content)} chars")
         print(f"[{timestamp}] Raw model output (generated in {generation_time:.2f}s):")
         print(f"{'='*30} MODEL OUTPUT {'='*30}")
@@ -210,8 +223,14 @@ def generate_subtopics():
         return jsonify({"error": "No topic provided"}), 400
     
     try:
-        # Use local Hugging Face model to generate more detailed tasks
-        prompt = f"""Break down this task/component into specific action items: '{topic}'
+        if ai_client is None:
+            raise ValueError("AI client is not available")
+            
+        # Use Azure AI to generate more detailed tasks
+        system_prompt = """You are a project planning assistant that helps break down tasks into specific action items.
+        Your responses should be formatted strictly as valid JSON arrays."""
+        
+        user_prompt = f"""Break down this task/component into specific action items: '{topic}'
         
         Return a JSON array with 3-5 specific steps or subtasks in the following structure: 
         [
@@ -223,24 +242,38 @@ def generate_subtopics():
         Make each step specific, actionable, and directly related to completing {topic}.
         Each step should be concrete enough that someone would know exactly what to do.
         Use action verbs to start each task description when possible.
-        Do not use generic names like "Step 1" or "Subtask"."""
+        Do not use generic names like "Step 1" or "Subtask".
         
-        logger.info(f"[{request_id}] Sending prompt for subtopics to model (length: {len(prompt)} chars)")
-        print(f"[{timestamp}] Sending subtopic prompt to model:")
+        Return ONLY the JSON array without any additional text or explanations."""
+        
+        logger.info(f"[{request_id}] Sending prompt for subtopics to Azure AI model (length: {len(user_prompt)} chars)")
+        print(f"[{timestamp}] Sending subtopic prompt to Azure AI model:")
         print(f"{'='*30} SUBTOPIC PROMPT {'='*30}")
-        print(prompt)
+        print(user_prompt)
         print(f"{'='*70}")
         
         # Log model parameters for this specific request
-        logger.info(f"[{request_id}] Model: {model_name}, Temperature: 0.7, Max length: 512")
+        logger.info(f"[{request_id}] Model: {model_name}, Temperature: 0.7, Max tokens: 1000")
         
-        # Generate content with the model
+        # Generate content with the Azure AI model
         generation_start = datetime.datetime.now()
-        subtopics_content = generator(prompt, max_length=512)[0]['generated_text']
+        
+        response = ai_client.complete(
+            messages=[
+                SystemMessage(system_prompt),
+                UserMessage(user_prompt),
+            ],
+            temperature=0.7,
+            top_p=0.95,
+            max_tokens=1000,
+            model=model_name
+        )
+        
+        subtopics_content = response.choices[0].message.content
         generation_time = (datetime.datetime.now() - generation_start).total_seconds()
         
         # Log the raw model output
-        logger.info(f"[{request_id}] Received subtopics response from model (generation time: {generation_time:.2f}s)")
+        logger.info(f"[{request_id}] Received subtopics response from Azure AI model (generation time: {generation_time:.2f}s)")
         logger.info(f"[{request_id}] Raw output length: {len(subtopics_content)} chars")
         print(f"[{timestamp}] Raw subtopics model output (generated in {generation_time:.2f}s):")
         print(f"{'='*30} SUBTOPICS OUTPUT {'='*30}")

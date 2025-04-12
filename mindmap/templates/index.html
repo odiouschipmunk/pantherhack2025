@@ -6,7 +6,18 @@
     <title>Project Planner AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- 1. Cytoscape Core Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
+    
+    <!-- 2. Cytoscape Extensions -->
+    <script src="https://unpkg.com/cytoscape-fcose@2.1.0/cytoscape-fcose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape-svg@0.4.0/cytoscape-svg.min.js"></script>
+    
+    <!-- 3. Additional Utilities -->
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <style>
         /* Custom styles for better appearance */
         .container {
@@ -23,6 +34,8 @@
         h1 {
             color: var(--primary-color);
             margin-bottom: 10px;
+            font-weight: 600;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.05);
         }
         
         .subtitle {
@@ -41,20 +54,22 @@
         }
         
         #mindmap {
-            min-height: 500px;
+            min-height: 600px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
             overflow: hidden;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            position: relative;
         }
         
         .loading-spinner {
             border: 5px solid rgba(108, 99, 255, 0.2);
             border-radius: 50%;
             border-top: 5px solid var(--primary-color);
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
+            margin-bottom: 10px;
         }
         
         @keyframes spin {
@@ -64,12 +79,131 @@
         
         .map-instructions {
             margin: 20px 0;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
         }
         
         .global-actions {
             display: flex;
             justify-content: center;
             margin: 20px 0;
+            gap: 12px;
+        }
+        
+        .input-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .input-container:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        #central-idea {
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        #central-idea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.2);
+            outline: none;
+        }
+        
+        #generate-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        #generate-btn:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px);
+        }
+        
+        /* Zoom controls for better navigation */
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .zoom-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Node styling for Cytoscape */
+        .cy-context-menus-cxt-menu {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            padding: 5px 0;
+            min-width: 150px;
+        }
+        
+        .cy-context-menus-cxt-menuitem {
+            padding: 6px 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .cy-context-menus-cxt-menuitem:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .cy-tooltip {
+            background-color: white;
+            border-radius: 6px;
+            padding: 8px 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            max-width: 200px;
+            text-align: center;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -93,27 +227,47 @@
         
         <div class="mindmap-container">
             <div class="mindmap-actions">
-                <div class="color-palette" style="display: none;">
-                    <div class="color-option" style="background-color: #95C8D8;"></div>
-                    <div class="color-option" style="background-color: #FFD375;"></div>
-                    <div class="color-option" style="background-color: #FA9285;"></div>
-                    <div class="color-option" style="background-color: #91D086;"></div>
-                    <div class="color-option" style="background-color: #B995C7;"></div>
-                </div>
-                <div class="node-actions" style="display: none;">
-                    <button id="delete-node-btn">Delete</button>
-                </div>
                 <div class="global-actions">
-                    <button id="download-btn">Download Plan</button>
-                    <button id="refresh-btn">New Project</button>
+                    <button id="add-topic-btn"><i class="fas fa-plus"></i> Add Topic</button>
+                    <button id="download-btn"><i class="fas fa-download"></i> Download Plan</button>
+                    <button id="refresh-btn"><i class="fas fa-sync-alt"></i> New Project</button>
                 </div>
             </div>
             <div class="map-instructions">
-                Click on tasks to select them. Use the "+" button to break down tasks further.
+                <p><i class="fas fa-info-circle"></i> Click and drag to move the diagram. Click on nodes to select them. Double-click for editing.</p>
+                <p><i class="fas fa-plus-circle"></i> Select a node and press the "+" button to add subtopics.</p>
             </div>
-            <div id="mindmap"></div>
+            <div id="mindmap" class="mindmap-diagram">
+                <!-- Zoom controls for better user experience -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-in"><i class="fas fa-plus"></i></button>
+                    <button class="zoom-btn" id="zoom-out"><i class="fas fa-minus"></i></button>
+                    <button class="zoom-btn" id="zoom-reset"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Modal Dialog for Editing Nodes -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Topic</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="edit-node-text" class="modal-input" placeholder="Enter topic text">
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel" class="modal-btn modal-btn-cancel">Cancel</button>
+                <button id="modal-save" class="modal-btn modal-btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification container -->
+    <div class="notification-container"></div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html> 

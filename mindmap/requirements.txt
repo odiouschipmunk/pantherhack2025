@@ -1,8 +1,9 @@
 flask
 python-dotenv
-transformers
-torch
-accelerate
-sentencepiece
-huggingface-hub
+werkzeug
+azure-ai-inference
+azure-core
+markupsafe
+jinja2
+uuid
 gunicorn
