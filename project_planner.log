@@ -2589,3 +2589,304 @@ Response headers:
 2025-04-12 20:57:15 [INFO] __main__ - Starting Flask development server
 2025-04-12 20:57:15 [WARNING] werkzeug -  * Debugger is active!
 2025-04-12 20:57:15 [INFO] werkzeug -  * Debugger PIN: 933-599-704
+2025-04-13 09:03:54 [INFO] __main__ - Starting application
+2025-04-13 09:03:54 [INFO] __main__ - Initializing Azure AI client with Phi-4 model...
+2025-04-13 09:03:54 [INFO] __main__ - Azure AI client initialized successfully with model: Phi-4-mini-instruct
+2025-04-13 09:03:54 [INFO] __main__ - Model configuration: temperature=0.7, top_p=0.95, max_tokens=1500
+2025-04-13 09:03:54 [INFO] __main__ - Starting Flask development server
+2025-04-13 09:03:54 [INFO] werkzeug - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-13 09:03:54 [INFO] werkzeug - [33mPress CTRL+C to quit[0m
+2025-04-13 09:03:54 [INFO] werkzeug -  * Restarting with stat
+2025-04-13 09:03:55 [INFO] __main__ - Starting application
+2025-04-13 09:03:55 [INFO] __main__ - Initializing Azure AI client with Phi-4 model...
+2025-04-13 09:03:55 [INFO] __main__ - Azure AI client initialized successfully with model: Phi-4-mini-instruct
+2025-04-13 09:03:55 [INFO] __main__ - Model configuration: temperature=0.7, top_p=0.95, max_tokens=1500
+2025-04-13 09:03:55 [INFO] __main__ - Starting Flask development server
+2025-04-13 09:03:55 [WARNING] werkzeug -  * Debugger is active!
+2025-04-13 09:03:55 [INFO] werkzeug -  * Debugger PIN: 933-599-704
+2025-04-13 09:04:00 [INFO] __main__ - Serving index page
+2025-04-13 09:04:00 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:04:00] "GET / HTTP/1.1" 200 -
+2025-04-13 09:04:01 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:04:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-13 09:04:01 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:04:01] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-04-13 09:04:01 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:04:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-13 09:11:34 [INFO] __main__ - Serving index page
+2025-04-13 09:11:34 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:11:34] "GET / HTTP/1.1" 200 -
+2025-04-13 09:11:34 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:11:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-13 09:11:34 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:11:34] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-04-13 09:11:56 [INFO] __main__ - [501793fb] Received request to generate project plan for: 'building a pc'
+2025-04-13 09:11:56 [INFO] __main__ - [501793fb] Sending prompt to Azure AI model (length: 1371 chars)
+2025-04-13 09:11:56 [INFO] __main__ - [501793fb] Model: Phi-4-mini-instruct, Temperature: 0.7, Max tokens: 1500
+2025-04-13 09:11:56 [INFO] azure.core.pipeline.policies.http_logging_policy - Request URL: 'https://models.inference.ai.azure.com/chat/completions?api-version=REDACTED'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '1769'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'e04668df-1868-11f0-83aa-e0c264f453d4'
+    'api-key': 'REDACTED'
+    'User-Agent': 'azsdk-python-ai-inference/1.0.0b9 Python/3.13.1 (Windows-11-10.0.26100-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-04-13 09:12:20 [INFO] azure.core.pipeline.policies.http_logging_policy - Response status: 200
+Response headers:
+    'Date': 'Sun, 13 Apr 2025 13:12:20 GMT'
+    'Content-Type': 'application/json'
+    'Transfer-Encoding': 'chunked'
+    'Connection': 'keep-alive'
+    'Vary': 'REDACTED'
+    'azureml-model-group': 'REDACTED'
+    'request-context': 'REDACTED'
+    'prompt_token_len': 'REDACTED'
+    'sampling_token_len': 'REDACTED'
+    'x-ms-rai-invoked': 'REDACTED'
+    'x-request-id': 'REDACTED'
+    'azureml-destination-model-group': 'REDACTED'
+    'azureml-destination-region': 'REDACTED'
+    'azureml-destination-deployment': 'REDACTED'
+    'azureml-destination-endpoint': 'REDACTED'
+    'x-ms-client-request-id': 'e04668df-1868-11f0-83aa-e0c264f453d4'
+    'azureml-model-deployment': 'REDACTED'
+    'azureml-model-session': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-aml-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Content-Encoding': 'REDACTED'
+2025-04-13 09:12:20 [INFO] __main__ - [501793fb] Received response from Azure AI model (generation time: 23.54s)
+2025-04-13 09:12:20 [INFO] __main__ - [501793fb] Raw output length: 1886 chars
+2025-04-13 09:12:20 [INFO] __main__ - [501793fb] Extracted JSON from model output
+2025-04-13 09:12:20 [INFO] __main__ - [501793fb] Successfully parsed JSON from model output
+2025-04-13 09:12:20 [INFO] __main__ - [501793fb] Returning response with 6 main tasks and 19 subtasks
+2025-04-13 09:12:20 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:12:20] "POST /generate HTTP/1.1" 200 -
+2025-04-13 09:13:17 [INFO] __main__ - [551b64e1] Received request to generate project plan for: 'a note taking website'
+2025-04-13 09:13:17 [INFO] __main__ - [551b64e1] Sending prompt to Azure AI model (length: 1395 chars)
+2025-04-13 09:13:17 [INFO] __main__ - [551b64e1] Model: Phi-4-mini-instruct, Temperature: 0.7, Max tokens: 1500
+2025-04-13 09:13:17 [INFO] azure.core.pipeline.policies.http_logging_policy - Request URL: 'https://models.inference.ai.azure.com/chat/completions?api-version=REDACTED'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '1793'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': '104d0172-1869-11f0-904f-e0c264f453d4'
+    'api-key': 'REDACTED'
+    'User-Agent': 'azsdk-python-ai-inference/1.0.0b9 Python/3.13.1 (Windows-11-10.0.26100-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-04-13 09:13:44 [INFO] azure.core.pipeline.policies.http_logging_policy - Response status: 200
+Response headers:
+    'Date': 'Sun, 13 Apr 2025 13:13:44 GMT'
+    'Content-Type': 'application/json'
+    'Transfer-Encoding': 'chunked'
+    'Connection': 'keep-alive'
+    'Vary': 'REDACTED'
+    'azureml-model-group': 'REDACTED'
+    'request-context': 'REDACTED'
+    'prompt_token_len': 'REDACTED'
+    'sampling_token_len': 'REDACTED'
+    'x-ms-rai-invoked': 'REDACTED'
+    'x-request-id': 'REDACTED'
+    'azureml-destination-model-group': 'REDACTED'
+    'azureml-destination-region': 'REDACTED'
+    'azureml-destination-deployment': 'REDACTED'
+    'azureml-destination-endpoint': 'REDACTED'
+    'x-ms-client-request-id': '104d0172-1869-11f0-904f-e0c264f453d4'
+    'azureml-model-deployment': 'REDACTED'
+    'azureml-model-session': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-aml-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Content-Encoding': 'REDACTED'
+2025-04-13 09:13:44 [INFO] __main__ - [551b64e1] Received response from Azure AI model (generation time: 26.97s)
+2025-04-13 09:13:44 [INFO] __main__ - [551b64e1] Raw output length: 2262 chars
+2025-04-13 09:13:44 [INFO] __main__ - [551b64e1] Extracted JSON from model output
+2025-04-13 09:13:44 [INFO] __main__ - [551b64e1] Successfully parsed JSON from model output
+2025-04-13 09:13:44 [INFO] __main__ - [551b64e1] Returning response with 8 main tasks and 16 subtasks
+2025-04-13 09:13:44 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:13:44] "POST /generate HTTP/1.1" 200 -
+2025-04-13 09:15:24 [INFO] __main__ - Serving index page
+2025-04-13 09:15:24 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:15:24] "GET / HTTP/1.1" 200 -
+2025-04-13 09:15:24 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:15:24] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-13 09:15:24 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:15:24] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-04-13 09:16:36 [INFO] __main__ - [507e52f7] Received request to generate project plan for: 'a note taking website'
+2025-04-13 09:16:36 [INFO] __main__ - [507e52f7] Sending prompt to Azure AI model (length: 1395 chars)
+2025-04-13 09:16:36 [INFO] __main__ - [507e52f7] Model: Phi-4-mini-instruct, Temperature: 0.7, Max tokens: 1500
+2025-04-13 09:16:36 [INFO] azure.core.pipeline.policies.http_logging_policy - Request URL: 'https://models.inference.ai.azure.com/chat/completions?api-version=REDACTED'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '1793'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': '86e7634a-1869-11f0-8d1e-e0c264f453d4'
+    'api-key': 'REDACTED'
+    'User-Agent': 'azsdk-python-ai-inference/1.0.0b9 Python/3.13.1 (Windows-11-10.0.26100-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-04-13 09:16:45 [INFO] azure.core.pipeline.policies.http_logging_policy - Response status: 200
+Response headers:
+    'Date': 'Sun, 13 Apr 2025 13:16:46 GMT'
+    'Content-Type': 'application/json'
+    'Transfer-Encoding': 'chunked'
+    'Connection': 'keep-alive'
+    'Vary': 'REDACTED'
+    'azureml-model-group': 'REDACTED'
+    'request-context': 'REDACTED'
+    'prompt_token_len': 'REDACTED'
+    'sampling_token_len': 'REDACTED'
+    'x-ms-rai-invoked': 'REDACTED'
+    'x-request-id': 'REDACTED'
+    'azureml-destination-model-group': 'REDACTED'
+    'azureml-destination-region': 'REDACTED'
+    'azureml-destination-deployment': 'REDACTED'
+    'azureml-destination-endpoint': 'REDACTED'
+    'x-ms-client-request-id': '86e7634a-1869-11f0-8d1e-e0c264f453d4'
+    'azureml-model-deployment': 'REDACTED'
+    'azureml-model-session': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-aml-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Content-Encoding': 'REDACTED'
+2025-04-13 09:16:45 [INFO] __main__ - [507e52f7] Received response from Azure AI model (generation time: 9.51s)
+2025-04-13 09:16:45 [INFO] __main__ - [507e52f7] Raw output length: 2377 chars
+2025-04-13 09:16:45 [INFO] __main__ - [507e52f7] Extracted JSON from model output
+2025-04-13 09:16:45 [WARNING] __main__ - [507e52f7] JSON decode error, using fallback tasks: Illegal trailing comma before end of array: line 25 column 67 (char 999)
+2025-04-13 09:16:45 [INFO] __main__ - Creating fallback tasks for: a note taking website
+2025-04-13 09:16:45 [INFO] __main__ - Detected website project type for: a note taking website
+2025-04-13 09:16:45 [INFO] __main__ - [507e52f7] Returning response with 8 main tasks and 16 subtasks
+2025-04-13 09:16:45 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:16:45] "POST /generate HTTP/1.1" 200 -
+2025-04-13 09:17:54 [INFO] __main__ - [363f1b04] Received request to generate project plan for: 'build a pc'
+2025-04-13 09:17:54 [INFO] __main__ - [363f1b04] Sending prompt to Azure AI model (length: 1362 chars)
+2025-04-13 09:17:54 [INFO] __main__ - [363f1b04] Model: Phi-4-mini-instruct, Temperature: 0.7, Max tokens: 1500
+2025-04-13 09:17:54 [INFO] azure.core.pipeline.policies.http_logging_policy - Request URL: 'https://models.inference.ai.azure.com/chat/completions?api-version=REDACTED'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '1760'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'b55e2dee-1869-11f0-b509-e0c264f453d4'
+    'api-key': 'REDACTED'
+    'User-Agent': 'azsdk-python-ai-inference/1.0.0b9 Python/3.13.1 (Windows-11-10.0.26100-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-04-13 09:18:15 [INFO] azure.core.pipeline.policies.http_logging_policy - Response status: 200
+Response headers:
+    'Date': 'Sun, 13 Apr 2025 13:18:15 GMT'
+    'Content-Type': 'application/json'
+    'Transfer-Encoding': 'chunked'
+    'Connection': 'keep-alive'
+    'Vary': 'REDACTED'
+    'azureml-model-group': 'REDACTED'
+    'request-context': 'REDACTED'
+    'prompt_token_len': 'REDACTED'
+    'sampling_token_len': 'REDACTED'
+    'x-ms-rai-invoked': 'REDACTED'
+    'x-request-id': 'REDACTED'
+    'azureml-destination-model-group': 'REDACTED'
+    'azureml-destination-region': 'REDACTED'
+    'azureml-destination-deployment': 'REDACTED'
+    'azureml-destination-endpoint': 'REDACTED'
+    'x-ms-client-request-id': 'b55e2dee-1869-11f0-b509-e0c264f453d4'
+    'azureml-model-deployment': 'REDACTED'
+    'azureml-model-session': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-aml-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Content-Encoding': 'REDACTED'
+2025-04-13 09:18:15 [INFO] __main__ - [363f1b04] Received response from Azure AI model (generation time: 21.31s)
+2025-04-13 09:18:15 [INFO] __main__ - [363f1b04] Raw output length: 1771 chars
+2025-04-13 09:18:15 [INFO] __main__ - [363f1b04] Extracted JSON from model output
+2025-04-13 09:18:15 [INFO] __main__ - [363f1b04] Successfully parsed JSON from model output
+2025-04-13 09:18:15 [INFO] __main__ - [363f1b04] Returning response with 6 main tasks and 12 subtasks
+2025-04-13 09:18:15 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:18:15] "POST /generate HTTP/1.1" 200 -
+2025-04-13 09:20:20 [INFO] __main__ - [189fa44b] Received request to generate project plan for: 'note taking website'
+2025-04-13 09:20:20 [INFO] __main__ - [189fa44b] Sending prompt to Azure AI model (length: 1389 chars)
+2025-04-13 09:20:20 [INFO] __main__ - [189fa44b] Model: Phi-4-mini-instruct, Temperature: 0.7, Max tokens: 1500
+2025-04-13 09:20:20 [INFO] azure.core.pipeline.policies.http_logging_policy - Request URL: 'https://models.inference.ai.azure.com/chat/completions?api-version=REDACTED'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '1787'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': '0cb5ee16-186a-11f0-8430-e0c264f453d4'
+    'api-key': 'REDACTED'
+    'User-Agent': 'azsdk-python-ai-inference/1.0.0b9 Python/3.13.1 (Windows-11-10.0.26100-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-04-13 09:20:43 [INFO] azure.core.pipeline.policies.http_logging_policy - Response status: 200
+Response headers:
+    'Date': 'Sun, 13 Apr 2025 13:20:44 GMT'
+    'Content-Type': 'application/json'
+    'Transfer-Encoding': 'chunked'
+    'Connection': 'keep-alive'
+    'Vary': 'REDACTED'
+    'azureml-model-group': 'REDACTED'
+    'request-context': 'REDACTED'
+    'prompt_token_len': 'REDACTED'
+    'sampling_token_len': 'REDACTED'
+    'x-ms-rai-invoked': 'REDACTED'
+    'x-request-id': 'REDACTED'
+    'azureml-destination-model-group': 'REDACTED'
+    'azureml-destination-region': 'REDACTED'
+    'azureml-destination-deployment': 'REDACTED'
+    'azureml-destination-endpoint': 'REDACTED'
+    'x-ms-client-request-id': '0cb5ee16-186a-11f0-8430-e0c264f453d4'
+    'azureml-model-deployment': 'REDACTED'
+    'azureml-model-session': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-aml-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Content-Encoding': 'REDACTED'
+2025-04-13 09:20:43 [INFO] __main__ - [189fa44b] Received response from Azure AI model (generation time: 23.00s)
+2025-04-13 09:20:43 [INFO] __main__ - [189fa44b] Raw output length: 2085 chars
+2025-04-13 09:20:43 [INFO] __main__ - [189fa44b] Extracted JSON from model output
+2025-04-13 09:20:43 [INFO] __main__ - [189fa44b] Successfully parsed JSON from model output
+2025-04-13 09:20:43 [INFO] __main__ - [189fa44b] Returning response with 7 main tasks and 21 subtasks
+2025-04-13 09:20:43 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:20:43] "POST /generate HTTP/1.1" 200 -
+2025-04-13 09:22:05 [INFO] __main__ - [63b6ba13] Received request to generate project plan for: 'building a rocket'
+2025-04-13 09:22:05 [INFO] __main__ - [63b6ba13] Sending prompt to Azure AI model (length: 1383 chars)
+2025-04-13 09:22:05 [INFO] __main__ - [63b6ba13] Model: Phi-4-mini-instruct, Temperature: 0.7, Max tokens: 1500
+2025-04-13 09:22:05 [INFO] azure.core.pipeline.policies.http_logging_policy - Request URL: 'https://models.inference.ai.azure.com/chat/completions?api-version=REDACTED'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '1781'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': '4b0ad4d4-186a-11f0-9706-e0c264f453d4'
+    'api-key': 'REDACTED'
+    'User-Agent': 'azsdk-python-ai-inference/1.0.0b9 Python/3.13.1 (Windows-11-10.0.26100-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-04-13 09:22:23 [INFO] azure.core.pipeline.policies.http_logging_policy - Response status: 200
+Response headers:
+    'Date': 'Sun, 13 Apr 2025 13:22:23 GMT'
+    'Content-Type': 'application/json'
+    'Transfer-Encoding': 'chunked'
+    'Connection': 'keep-alive'
+    'Vary': 'REDACTED'
+    'azureml-model-group': 'REDACTED'
+    'request-context': 'REDACTED'
+    'prompt_token_len': 'REDACTED'
+    'sampling_token_len': 'REDACTED'
+    'x-ms-rai-invoked': 'REDACTED'
+    'x-request-id': 'REDACTED'
+    'azureml-destination-model-group': 'REDACTED'
+    'azureml-destination-region': 'REDACTED'
+    'azureml-destination-deployment': 'REDACTED'
+    'azureml-destination-endpoint': 'REDACTED'
+    'x-ms-client-request-id': '4b0ad4d4-186a-11f0-9706-e0c264f453d4'
+    'azureml-model-deployment': 'REDACTED'
+    'azureml-model-session': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-aml-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Content-Encoding': 'REDACTED'
+2025-04-13 09:22:23 [INFO] __main__ - [63b6ba13] Received response from Azure AI model (generation time: 17.88s)
+2025-04-13 09:22:23 [INFO] __main__ - [63b6ba13] Raw output length: 1962 chars
+2025-04-13 09:22:23 [INFO] __main__ - [63b6ba13] Extracted JSON from model output
+2025-04-13 09:22:23 [INFO] __main__ - [63b6ba13] Successfully parsed JSON from model output
+2025-04-13 09:22:23 [INFO] __main__ - [63b6ba13] Returning response with 7 main tasks and 14 subtasks
+2025-04-13 09:22:23 [INFO] werkzeug - 127.0.0.1 - - [13/Apr/2025 09:22:23] "POST /generate HTTP/1.1" 200 -
