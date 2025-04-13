@@ -7,16 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!--go js-->
+    <script src="https://cdn.jsdelivr.net/npm/gojs/release/go.js"></script>
+    <!-- Cytoscape libraries removed as GoJS is used -->
     
-    <!-- 1. Cytoscape Core Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
-    
-    <!-- 2. Cytoscape Extensions -->
-    <script src="https://unpkg.com/cytoscape-fcose@2.1.0/cytoscape-fcose.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cytoscape-svg@0.4.0/cytoscape-svg.min.js"></script>
-    
-    <!-- 3. Additional Utilities -->
+    <!-- Additional Utilities -->
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <style>
         /* Custom styles for better appearance */
@@ -54,7 +49,7 @@
         }
         
         #mindmap {
-            min-height: 600px;
+            height: 75vh;
             border-radius: 8px;
             background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
             overflow: hidden;
@@ -215,59 +210,60 @@
             <p class="dev-note">👨‍💻 Developers: Open browser console (F12) to see detailed logs</p>
         </header>
         
-        <div class="input-container">
-            <input type="text" id="central-idea" placeholder="What do you want to build or create?">
-            <button id="generate-btn">Plan Project</button>
-        </div>
+        <form id="project-form" class="input-container" onsubmit="return false;">
+            <label for="central-idea" class="sr-only">Project Idea</label>
+            <input type="text" id="central-idea" placeholder="What do you want to build or create?" required aria-required="true">
+            <button id="generate-btn" type="submit">Plan Project</button>
+        </form>
         
-        <div class="loading-container">
+        <div class="loading-container" role="status" aria-live="polite">
             <div class="loading-spinner"></div>
             <p>Creating your project plan...</p>
         </div>
         
-        <div class="mindmap-container">
+        <div class="mindmap-container" aria-live="polite">
             <div class="mindmap-actions">
                 <div class="global-actions">
-                    <button id="add-topic-btn"><i class="fas fa-plus"></i> Add Topic</button>
-                    <button id="download-btn"><i class="fas fa-download"></i> Download Plan</button>
-                    <button id="refresh-btn"><i class="fas fa-sync-alt"></i> New Project</button>
+                    <button id="add-topic-btn" aria-label="Add new topic"><i class="fas fa-plus"></i> Add Topic</button>
+                    <button id="download-btn" aria-label="Download project plan"><i class="fas fa-download"></i> Download Plan</button>
+                    <button id="refresh-btn" aria-label="Start new project plan"><i class="fas fa-sync-alt"></i> New Project</button>
                 </div>
             </div>
             <div class="map-instructions">
-                <p><i class="fas fa-info-circle"></i> Click and drag to move the diagram. Click on nodes to select them. Double-click for editing.</p>
-                <p><i class="fas fa-plus-circle"></i> Select a node and press the "+" button to add subtopics.</p>
+                <p><i class="fas fa-info-circle" aria-hidden="true"></i> Click and drag nodes to rearrange. Use mouse wheel or pinch to zoom.</p>
+                <p><i class="fas fa-mouse-pointer" aria-hidden="true"></i> Double-click a node to edit its text.</p>
+                <p><i class="fas fa-expand-arrows-alt" aria-hidden="true"></i> Use zoom controls (bottom-right) for finer adjustments.</p>
             </div>
             <div id="mindmap" class="mindmap-diagram">
-                <!-- Zoom controls for better user experience -->
                 <div class="zoom-controls">
-                    <button class="zoom-btn" id="zoom-in"><i class="fas fa-plus"></i></button>
-                    <button class="zoom-btn" id="zoom-out"><i class="fas fa-minus"></i></button>
-                    <button class="zoom-btn" id="zoom-reset"><i class="fas fa-expand"></i></button>
+                    <button class="zoom-btn" id="zoom-in" aria-label="Zoom In"><i class="fas fa-plus" aria-hidden="true"></i></button>
+                    <button class="zoom-btn" id="zoom-out" aria-label="Zoom Out"><i class="fas fa-minus" aria-hidden="true"></i></button>
+                    <button class="zoom-btn" id="zoom-reset" aria-label="Reset Zoom"><i class="fas fa-expand" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Dialog for Editing Nodes -->
-    <div id="edit-modal" class="modal">
+    <div id="edit-modal" class="modal" aria-labelledby="modal-title" aria-modal="true" role="dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Edit Topic</h3>
-                <button class="modal-close">&times;</button>
+                <h2 id="modal-title" class="modal-title">Edit Node</h2>
+                <button class="modal-close" aria-label="Close edit dialog">&times;</button>
             </div>
             <div class="modal-body">
-                <input type="text" id="edit-node-text" class="modal-input" placeholder="Enter topic text">
+                <label for="modal-input" class="sr-only">Node Text</label>
+                <input type="text" id="modal-input" class="modal-input" placeholder="Enter new node text">
             </div>
             <div class="modal-footer">
-                <button id="modal-cancel" class="modal-btn modal-btn-cancel">Cancel</button>
-                <button id="modal-save" class="modal-btn modal-btn-primary">Save</button>
+                <button class="modal-btn modal-btn-cancel">Cancel</button>
+                <button class="modal-btn modal-btn-primary">Save Changes</button>
             </div>
         </div>
     </div>
 
-    <!-- Notification container -->
-    <div class="notification-container"></div>
+    <div id="notification-container" class="notification-container" aria-live="assertive"></div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html> 
+<!-- -->
